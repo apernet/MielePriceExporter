@@ -26,10 +26,12 @@ function readExcel() {
     for ($row = 1; $row <= $highestRow; ++$row) {
 
 //  for ($col = 0; $col <= $highestColumnIndex; ++$col) {
-        $model = $objWorksheet->getCellByColumnAndRow(7, $row)->getValue();
-        $newPrice = $objWorksheet->getCellByColumnAndRow(13, $row)->getValue();
+        $model = $objWorksheet->getCellByColumnAndRow(4, $row)->getValue();
+        $newPrice = $objWorksheet->getCellByColumnAndRow(8, $row)->getValue();
 //        if($col==7){
-        echo "<br><br>Buscando: ".$model;
+        if(!strlen($model) > 0)
+            return 0;
+//        echo "<br><br>Buscando: ".$model;
                 searh($model, $newPrice);
 //        }
 //        else{
@@ -46,7 +48,7 @@ function searh($model, $newPrice) {
     $servername = "127.0.0.1";
     $username = "root";
     $password = "root";
-    $db = "miele_280317";
+    $db = "miele_020417";
 
 // Create connection
     $conn = new mysqli($servername, $username, $password, $db);
@@ -64,9 +66,15 @@ function searh($model, $newPrice) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             echo "<br>Encontrado: id: " . $row["id"] . " - Model: " . $row["modelo"]." oldPrice:". $row["precio"] ."    newPrice: $newPrice<br>";
+            $id = $row["id"];
+            $update = "UPDATE productos SET precio = $newPrice where id = $id";
+            
+            if(!$conn->query($update))
+                echo "Error al actualizar producto";
+            else
+                echo "Producto actualizado";
         }
     } else {
-        echo "<br><br>0 results of $model";
     }
     $conn->close();
 }
