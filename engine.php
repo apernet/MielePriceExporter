@@ -32,7 +32,8 @@ function readExcel() {
         if(!strlen($model) > 0)
             return 0;
 //        echo "<br><br>Buscando: ".$model;
-                searh($model, $newPrice);
+        updateProductos($model, $newPrice);
+        
 //        }
 //        else{
 //            echo " $col: $model ";
@@ -44,11 +45,11 @@ function readExcel() {
     echo '</table>' . "\n";
 }
 
-function searh($model, $newPrice) {
+function updateProductos($model, $newPrice) {
     $servername = "127.0.0.1";
     $username = "root";
     $password = "root";
-    $db = "miele_020417";
+    $db = "miele_030417_after_update";
 
 // Create connection
     $conn = new mysqli($servername, $username, $password, $db);
@@ -67,7 +68,12 @@ function searh($model, $newPrice) {
         while ($row = $result->fetch_assoc()) {
             echo "<br>Encontrado: id: " . $row["id"] . " - Model: " . $row["modelo"]." oldPrice:". $row["precio"] ."    newPrice: $newPrice<br>";
             $id = $row["id"];
-            $update = "UPDATE productos SET precio = $newPrice where id = $id";
+            $update = "UPDATE productos SET precio = ".trim($newPrice)." where id = $id";
+            
+            if(strcasecmp(trim($newPrice), trim($row['precio'])) == 0){
+                echo "<br>Ya esta actualizado";
+                    return 0;
+            }
             
             if(!$conn->query($update))
                 echo "Error al actualizar producto";
@@ -75,6 +81,49 @@ function searh($model, $newPrice) {
                 echo "Producto actualizado";
         }
     } else {
+        updateAccesorios($model, $newPrice);
+    }
+    $conn->close();
+}
+
+
+function updateAccesorios($model, $newPrice) {
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "root";
+    $db = "miele_030417_after_update";
+
+// Create connection
+    $conn = new mysqli($servername, $username, $password, $db);
+
+// Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM accesorios where modelo='$model';";
+    
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<br>Encontrado: id: " . $row["id"] . " - Model: " . $row["modelo"]." oldPrice:". $row["precio"] ."    newPrice: $newPrice<br>";
+            $id = $row["id"];
+            $update = "UPDATE accesorios SET precio = ".trim($newPrice)." where id = $id";
+            
+            if(strcasecmp(trim($newPrice), trim($row['precio'])) == 0){
+                echo "<br>Ya esta actualizado";
+                    return 0;
+            }
+            
+            if(!$conn->query($update))
+                echo "Error al actualizar producto";
+            else
+                echo "Producto actualizado";
+        }
+    } else {
+        echo "<br>No existe $model";
     }
     $conn->close();
 }

@@ -6971,3 +6971,15 @@
 [Fri Mar 31 18:05:57.945061 2017] [:error] [pid 33324] [client 127.0.0.1:51751] PHP Fatal error:  Uncaught exception 'PHPExcel_Reader_Exception' with message 'Could not open PreciosAbril2.xlsx for reading! File does not exist.' in /Library/WebServer/Documents/MielePriceExporter/apis/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php:338\nStack trace:\n#0 /Library/WebServer/Documents/MielePriceExporter/engine.php(17): PHPExcel_Reader_Excel2007->load('PreciosAbril2.x...')\n#1 /Library/WebServer/Documents/MielePriceExporter/engine.php(10): readExcel()\n#2 {main}\n  thrown in /Library/WebServer/Documents/MielePriceExporter/apis/PHPExcel/Classes/PHPExcel/Reader/Excel2007.php on line 338
 [Fri Mar 31 18:06:27.924384 2017] [:error] [pid 33326] [client 127.0.0.1:53538] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Library/WebServer/Documents/MielePriceExporter/engine.php on line 32
 [Fri Mar 31 18:06:30.090743 2017] [:error] [pid 33326] [client 127.0.0.1:53538] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Library/WebServer/Documents/MielePriceExporter/engine.php on line 32
+[Mon Apr 03 11:03:46.593870 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP Warning:  mysqli::mysqli(): (HY000/1049): Unknown database 'miele_020417' in /Library/WebServer/Documents/MielePriceExporter/engine.php on line 54
+[Mon Apr 03 11:03:46.593992 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP Stack trace:
+[Mon Apr 03 11:03:46.594028 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP   1. {main}() /Library/WebServer/Documents/MielePriceExporter/engine.php:0
+[Mon Apr 03 11:03:46.594051 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP   2. readExcel() /Library/WebServer/Documents/MielePriceExporter/engine.php:10
+[Mon Apr 03 11:03:46.594071 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP   3. searh() /Library/WebServer/Documents/MielePriceExporter/engine.php:35
+[Mon Apr 03 11:03:46.594091 2017] [:error] [pid 33327] [client 127.0.0.1:50994] PHP   4. mysqli->mysqli() /Library/WebServer/Documents/MielePriceExporter/engine.php:54
+[Mon Apr 03 16:24:50.224481 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP Warning:  mysqli::mysqli(): (HY000/1049): Unknown database 'miele_020417' in /Library/WebServer/Documents/MielePriceExporter/engine.php on line 54
+[Mon Apr 03 16:24:50.234928 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP Stack trace:
+[Mon Apr 03 16:24:50.234981 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP   1. {main}() /Library/WebServer/Documents/MielePriceExporter/engine.php:0
+[Mon Apr 03 16:24:50.235006 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP   2. readExcel() /Library/WebServer/Documents/MielePriceExporter/engine.php:10
+[Mon Apr 03 16:24:50.235029 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP   3. searh() /Library/WebServer/Documents/MielePriceExporter/engine.php:35
+[Mon Apr 03 16:24:50.235053 2017] [:error] [pid 33327] [client 127.0.0.1:61841] PHP   4. mysqli->mysqli() /Library/WebServer/Documents/MielePriceExporter/engine.php:54
